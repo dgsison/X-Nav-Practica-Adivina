@@ -4,6 +4,7 @@ var levelTime;
 var timeOut;
 var gameSelected;
 var photoPlace;
+var coords;
 var jugando = 0;
 var j = 0;
 var cont2 = -1;
@@ -25,6 +26,7 @@ function readJSON(gameSelected){
 			cont2 = cont;
 			//console.log("photoPlace dentro: " + data.juego[cont].properties.name);
 			photoPlace = data.juego[cont].properties.name;
+			coords = data.juego[cont].coordinates;
 			j = 0;
 			load_images(levelTime);
 		});
@@ -92,6 +94,7 @@ function load_images(levelTime){
 
 
 
+
 $(document).ready(function() {
 	
 	// add an OpenStreetMap tile layer
@@ -106,12 +109,17 @@ $(document).ready(function() {
 		if(jugando == 1){
 	    	popup
 		        .setLatLng(e.latlng)
-		        .setContent("Coordenadas chacho: " + e.latlng.toString())
+		        .setContent("Click: " + e.latlng.toString() + "destino: " + coords)
 		        .openOn(map);
 		    clearInterval(timeOut);
 		    console.log("fotos vistas: " + j);
 		    j = 0;
 		    $("#photo").empty();
+		    var res = coords.split(","); 
+		    var latlngDest = L.latLng(parseFloat(res[0]), parseFloat(res[1]));
+		    
+		    var distance = e.latlng.distanceTo(latlngDest);
+		    console.log("Prueba de latlong: " + distance/1000);
 		    readJSON(gameSelected);
 		}else{
 			popup

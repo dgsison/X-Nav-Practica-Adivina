@@ -2,10 +2,10 @@
 
 "type": "FeatureCollection",
     "juego": [
-      {"type": "Feature", "properties":{ "name": "Santiago Bernabeu"}, "coordinates": "40.453132, -3.688553"},
-      {"type": "Feature", "properties":{ "name": "Old trafford stadium"}, "coordinates": "53.462909, -2.291302"},
-      {"type": "Feature", "properties":{ "name": "Wembley stadium"}, "coordinates": "51.557722, -0.279911"},
-      {"type": "Feature", "properties":{ "name": "Camp nou"}, "coordinates": "41.381085, 2.123383"},
-      {"type": "Feature", "properties":{ "name": "Allianz arena"}, "coordinates": "48.218897, 11.624176"}]
+      {"type": "Feature", "properties":{ "name": "Santiago Bernabeu"}, "coordinates": "40.453132,-3.688553"},
+      {"type": "Feature", "properties":{ "name": "Old trafford stadium"}, "coordinates": "53.462909,-2.291302"},
+      {"type": "Feature", "properties":{ "name": "Wembley stadium"}, "coordinates": "51.557722,-0.279911"},
+      {"type": "Feature", "properties":{ "name": "Camp nou"}, "coordinates": "41.381085,2.123383"},
+      {"type": "Feature", "properties":{ "name": "Allianz arena"}, "coordinates": "48.218897,11.624176"}]
         
 }
