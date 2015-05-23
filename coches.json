@@ -1,0 +1,10 @@
+{
+
+"type": "FeatureCollection",
+    "juego": [
+      {"type": "Feature", "properties":{ "name": "Mercedes Benz"}, "coordinates": "51.732402, 10.135516"},
+      {"type": "Feature", "properties":{ "name": "Ferrari"}, "coordinates": "42.104659, 13.233661"},
+      {"type": "Feature", "properties":{ "name": "Seat cars"}, "coordinates": "40.433691, -3.692150"},
+      {"type": "Feature", "properties":{ "name": "Toyota"}, "coordinates": "36.371623, 139.013493"},
+      {"type": "Feature", "properties":{ "name": "Ford"}, "coordinates": "40.717157, -99.104185"}]       
+}
