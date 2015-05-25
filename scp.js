@@ -9,7 +9,7 @@ var jugando = 0;
 var j = 0;
 var cont2 = -1;
 var puntos = 0;
-var numJuegos = 0;
+var numJuegos = 1;
 
 function load_map() {
 	map = new L.Map('map', {zoomControl: true});
@@ -116,9 +116,10 @@ $("#resultList").on('click', 'li', function (){
 
 	var go = actualValue - numJuegos;
 	console.log("go: " + go + ", actualvalue: " + actualValue + ", numjuegos " + numJuegos);
-	numJuegos = actualValue;
+	//numJuegos = actualValue;
 	if(go != 0)
 		history.go(go);
+	numJuegos = actualValue;
 
 	// $("#list li").each(function(){
 	// 	var num = $(this).attr("value");
@@ -221,6 +222,8 @@ $(document).ready(function() {
 					history.pushState(stateObj, "nombrePrueba", "?juego=" + name[0]);
 					readJSON(gameSelected);
 					jugando = 1;
+					document.getElementById('title').innerHTML = "Adivina " + name[0];
+					
 					//load_images(levelTime);
 					// levelTime = undefined;
 					// gameSelected = undefined;
@@ -329,7 +332,10 @@ $(document).ready(function() {
 		$("#photo").empty();
 		jugando = 0;
 		console.log(JSON.stringify(event.state.juego));
-
-		//readJSON(JSON.stringify(event.state.juego));
+		var partir = gameSelected;
+		var name = partir.split(".");
+		document.getElementById('title').innerHTML = "Adivina " + name[0];
+		readJSON(gameSelected);
+		jugando = 1;
 	};
 });

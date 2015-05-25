@@ -1,10 +1,10 @@
 {
   "name": "Adivina",
   "description": "Juego en que debes adivinar la localizacion de las imagenes mostras en el mapa",
-  "launch_path": "dgsison.github.io/X-Nav-Practica-Adivina/index.html",
+  "launch_path": "/index.html",
   "developer": {
     "name": "Diego Garcia",
-    "url": "dgsison.github.io/X-Nav-Practica-Adivina"
+    "url": ""
   },
   "default_locale": "en"
 }

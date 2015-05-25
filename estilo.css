@@ -14,15 +14,18 @@
 
 #photo{
   width: 350px;
-  height: 200px;
+  height: 250px;
   text-align:center;
   margin-top: 20px;
 }
 
 #buttons{
-  width: 80%;
+  /*width: 80%;*/
   margin-top: 20px;
   text-align:center;
+  border: 3px solid #000;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #level{
@@ -43,7 +46,20 @@
   border: 3px solid #000;
   margin-top: 20px;
   margin-bottom: 20px;
+
 }
+
+#boxController{
+  background-color: #32D9AA;
+}
+
+/*#buttonPlay{
+  background-color: #32D9C6;
+}*/
+
+/**{
+  background-color: #32D9AA;
+}*/
 
 /*div#search {
   background-color: white;
