@@ -13,8 +13,8 @@
 }
 
 #photo{
-  /*width: 100%;
-  height: 100%;*/
+  width: 350px;
+  height: 200px;
   text-align:center;
   margin-top: 20px;
 }
@@ -33,6 +33,10 @@
 #games{
   margin-top: 20px;
  
+}
+#puntos{
+  margin-top: 20px;
+  font: 150% sans-serif;
 }
 
 #results{

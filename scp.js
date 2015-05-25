@@ -8,6 +8,8 @@ var coords;
 var jugando = 0;
 var j = 0;
 var cont2 = -1;
+var puntos = 0;
+var numJuegos = 0;
 
 function load_map() {
 	map = new L.Map('map', {zoomControl: true});
@@ -31,6 +33,19 @@ function readJSON(gameSelected){
 			load_images(levelTime);
 		});
 		//console.log("El photPlace es: " + photoPlace);
+}
+
+function hora(){
+	var fecha = new Date()
+	var hora = fecha.getHours()
+	var minuto = fecha.getMinutes()
+	var segundo = fecha.getSeconds()
+	if (hora < 10) {hora = "0" + hora}
+	if (minuto < 10) {minuto = "0" + minuto}
+	if (segundo < 10) {segundo = "0" + segundo}
+	var horita = hora + ":" + minuto + ":" + segundo
+	return horita;
+	tiempo = setTimeout('hora()',1000)
 }
 
 function load_images(levelTime){
@@ -83,15 +98,51 @@ function load_images(levelTime){
 		// });
 	});
 
-// function play(){
-// 	if(gameSelected == undefined)
-// 		alert("Debes selecionar un tipo de juego");
-// 	if(levelTime == undefined)
-// 		alert("Debes selecionar un nicel de dificultad.");
-// 	console.log("gameSelected: " + gameSelected + ", Level: " + levelTime);
-// }
+function calculatePos(){
+	var size = $("#list li").length;
+	$("#list li").each(function(){
+		var num = $(this).attr("value");
+		num = num - 1;
+		$(this).attr("value", num);
+		$(this).children("a").attr("href", "javascript:history.go("+num+")");
+	});
+}
 
 
+$("#resultList").on('click', 'li', function (){
+	var actualValue = $(this).attr("value");
+	//$(this).remove();
+	var size = $("#list li").length;
+
+	var go = actualValue - numJuegos;
+	console.log("go: " + go + ", actualvalue: " + actualValue + ", numjuegos " + numJuegos);
+	numJuegos = actualValue;
+	if(go != 0)
+		history.go(go);
+
+	// $("#list li").each(function(){
+	// 	var num = $(this).attr("value");
+	// 	if(num != actualValue){
+	// 		num = num - actualValue;
+	// 		$(this).attr("value", num);
+	// 		$(this).children("a").attr("href", "javascript:history.go("+num+")");
+	// 		alert("el IF");
+	// 	}else{
+	// 		//$("#puntos").empty();
+	// 		alert("el ELSE");	
+	// 	}
+		
+	// });
+
+});
+
+	// var size = $("#list li").length;
+	// $("#list li").each(function(){
+	// 	var num = $(this).attr("value");
+	// 	num = num - 1;
+	// 	$(this).attr("value", num);
+	// 	$(this).children("a").attr("href", "javascript:history.go("+num+")");
+	// });
 
 
 
@@ -107,19 +158,26 @@ $(document).ready(function() {
 	function onMapClick(e) {
 		//alert(e.latlng.toString());
 		if(jugando == 1){
-	    	popup
-		        .setLatLng(e.latlng)
-		        .setContent("Click: " + e.latlng.toString() + "destino: " + coords)
-		        .openOn(map);
-		    clearInterval(timeOut);
+	    	
+		    
 		    console.log("fotos vistas: " + j);
-		    j = 0;
-		    $("#photo").empty();
 		    var res = coords.split(","); 
 		    var latlngDest = L.latLng(parseFloat(res[0]), parseFloat(res[1]));
-		    
-		    var distance = e.latlng.distanceTo(latlngDest);
-		    console.log("Prueba de latlong: " + distance/1000);
+		    var distance = e.latlng.distanceTo(latlngDest)/1000;
+		    console.log("Distance (Km): " + distance);
+		    puntos = (puntos + (distance * j));
+
+
+		    $("#puntos").empty();
+		    $("#puntos").append( "<p>","Puntos: ", puntos,"</p>" );
+		    popup
+		        .setLatLng(e.latlng)
+		        .setContent("Distancia: " + distance.toFixed(3) + ", puntos acumulados: " + puntos)
+		        .openOn(map);
+
+		    $("#photo").empty();
+		    clearInterval(timeOut);
+		     j = 0;
 		    readJSON(gameSelected);
 		}else{
 			popup
@@ -153,8 +211,14 @@ $(document).ready(function() {
 				alert("Debes selecionar un tipo de juego");
 			else{
 				if(levelTime == undefined)
-					alert("Debes selecionar un nicel de dificultad.");
+					alert("Debes selecionar un nivel de dificultad.");
 				else{
+					var partir = gameSelected;
+					console.log("antesssss: " + partir);
+					var name = partir.split(".");
+					var stateObj = { puntuacion: puntos, juego: gameSelected};
+					console.log("namePPPP: " + name[0]);
+					history.pushState(stateObj, "nombrePrueba", "?juego=" + name[0]);
 					readJSON(gameSelected);
 					jugando = 1;
 					//load_images(levelTime);
@@ -179,10 +243,43 @@ $(document).ready(function() {
 			clearInterval(timeOut);
 			j = 0;
 			$("#photo").empty();
+			//quito el campos puntos?? y reinicio la puntiación??
+			$("#puntos").empty();
+			puntos = 0;
  		}
 
  	});
 
+ 	$('#buttonNuevo').click(function btnuevo(){
+ 		if(jugando == 0){
+ 			alert("Inicia primero un nuevo juego");
+ 		}else{
+ 			//guardo el hstory
+			var partir = gameSelected;
+			var name = partir.split(".");
+			
+			console.log("Puntos: "+ puntos);
+			console.log("onpopostate1: " + gameSelected);
+			var stateObj = { puntuacion: puntos, juego: gameSelected, level: levelTime};
+			console.log(stateObj);
+			console.log("comillas:" + name[0]);
+			history.replaceState(stateObj, "nombrePrueba", "?juego="+name[0]);
+			$("#list").append('<li value='+numJuegos+'><a><span class=\"tab\">'+ name[0] + ", hora: " + hora()+'</span></a></li>');
+			numJuegos = numJuegos + 1;
+ 			jugando = 0;
+ 			puntos = 0;
+ 			levelTime = undefined;
+			gameSelected = undefined;
+ 			clearInterval(timeOut);
+			j = 0;
+			$("#puntos").empty();
+			$("#photo").empty();
+			//calculatePos();
+			//var stateObj = { puntuacion: 0, juego: ""};
+			//history.pushState(stateObj, "nombrePrueba", "?juego=" + name[0]);	
+	 	}
+
+ 	});
 
 	$('#level').on('change',function(){
     	var level = $(this).val();
@@ -200,4 +297,39 @@ $(document).ready(function() {
     	// else
     	// 	load_images(levelTime);
 	});
+
+
+
+	// $('#buttonSave').click(function btSave(){
+	// 	var partir = gameSelected;
+	// 	var name = partir.split(".");
+	// 	console.log("onpopostate1: " + gameSelected);
+
+	// 	var stateObj = { puntuacion: puntos, juego: gameSelected, level: levelTime};
+	// 	console.log(stateObj);
+	// 	history.pushState(stateObj, "nombrePrueba", name[0] + ".html");
+	// 	$("#list").append('<li><a href="javascript:history.go(-1)"><span class="tab">'+ name[0] +'</span></li>');
+
+	// });
+
+	window.onpopstate = function(event){
+		alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+		$("#puntos").empty();
+		puntos = parseFloat(JSON.stringify(event.state.puntuacion));
+		$("#puntos").append("<p>","Puntos: ", parseFloat(JSON.stringify(event.state.puntuacion)),"</p>");
+		gameSelected = (JSON.stringify(event.state.juego)).toString();
+		var newStr = gameSelected.substring(0, gameSelected.length-1);
+		newStr = newStr.substring(1, newStr.length);
+		console.log(newStr);
+		gameSelected = newStr;	
+		levelTime = JSON.stringify(event.state.level);
+		clearInterval(timeOut);
+		j = 0;
+		
+		$("#photo").empty();
+		jugando = 0;
+		console.log(JSON.stringify(event.state.juego));
+
+		//readJSON(JSON.stringify(event.state.juego));
+	};
 });
