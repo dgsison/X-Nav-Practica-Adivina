@@ -21,3 +21,7 @@ En este caso he creado 3 tipos de juegos (ficheros JSON) donde incluyo como name
 Con el uso del history API puedo guardar el estado (tipo de juego, puntuación, dificultad y hora) de un juego y poder volver a jugarlo en un futuro. Cuando "guardo" lo que hago es introducirlo como un elemento(con una etiqueta a para poder verlo como linkeable) en un lista ul de mi HTML asignandole un valor según el número de elementos introducidos y aumentar mi contador de juegos jugados. Esto lo hago para tener la cuenta de en que juego actual estoy y cuales son mis juegos pasados o futuros para poder acceder a ellos mediante la orden history.go(xxx).
 
 Comentar que me he preocupado más por intentar dar un funcionamiento correcto de mi práctica (invertir más horas en el javascript) que por darle un diseño visual más sofisticado o menos "espartano" pegándome con el css. Creo que he dejado un diseño simple y claro del funcionamiento del programa, siempre controlando que no se puedan hacer acciones sin sentido como intentar iniciar un nuevo juego sin seleccionar su tipo o nivel de dificultad o similares e informando al usuario de ello.
+
+
+Link del video: https://www.youtube.com/watch?v=-8VvHZoVYfU&feature=youtu.be
+
