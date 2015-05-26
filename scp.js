@@ -20,7 +20,7 @@ function load_map() {
 }
 
 function readJSON(gameSelected){
-	$.getJSON(gameSelected)
+	$.getJSON("/juegos/" + gameSelected)
 		.done(function(data){
 			var cont = Math.floor(Math.random() * (4-0+1)) + 0;
 			while(cont == cont2)
@@ -170,10 +170,10 @@ $(document).ready(function() {
 
 
 		    $("#puntos").empty();
-		    $("#puntos").append( "<p>","Puntos: ", puntos,"</p>" );
+		    $("#puntos").append( "<p>","Puntos: ", parseInt(puntos),"</p>" );
 		    popup
 		        .setLatLng(e.latlng)
-		        .setContent("Distancia: " + distance.toFixed(3) + ", puntos acumulados: " + puntos)
+		        .setContent("Distancia: " + distance.toFixed(1) + ", puntos acumulados: " + parseInt(puntos))
 		        .openOn(map);
 
 		    $("#photo").empty();
@@ -316,10 +316,10 @@ $(document).ready(function() {
 	// });
 
 	window.onpopstate = function(event){
-		alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+		//alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
 		$("#puntos").empty();
 		puntos = parseFloat(JSON.stringify(event.state.puntuacion));
-		$("#puntos").append("<p>","Puntos: ", parseFloat(JSON.stringify(event.state.puntuacion)),"</p>");
+		$("#puntos").append("<p>","Puntos: ", parseInt(JSON.stringify(event.state.puntuacion)),"</p>");
 		gameSelected = (JSON.stringify(event.state.juego)).toString();
 		var newStr = gameSelected.substring(0, gameSelected.length-1);
 		newStr = newStr.substring(1, newStr.length);

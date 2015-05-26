@@ -1,0 +1,12 @@
+
+{
+
+"type": "FeatureCollection",
+    "juego": [
+      {"type": "Feature", "properties":{ "name": "Madrid ciudad"}, "coordinates": "40.416919,-3.703569"},
+      {"type": "Feature", "properties":{ "name": "Barcelona ciudad"}, "coordinates": "41.395563,2.180354"},
+      {"type": "Feature", "properties":{ "name": "London"}, "coordinates": "51.507077,-0.127756"},
+      {"type": "Feature", "properties":{ "name": "Sidney"}, "coordinates": "-33.880976,151.212111"},
+      {"type": "Feature", "properties":{ "name": "New York city"}, "coordinates": "40.729530,-73.987749"}]       
+}
+

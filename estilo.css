@@ -1,3 +1,7 @@
+body{
+  background: #32D9AA;
+}
+
 #map { 
 
   width: 100%;
@@ -51,7 +55,11 @@
 
 #boxController{
   background-color: #32D9AA;
+  /*padding-bottom: 207px;*/
 }
+
+body { color: purple }
+
 
 /*#buttonPlay{
   background-color: #32D9C6;
