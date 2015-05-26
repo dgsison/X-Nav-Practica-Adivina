@@ -20,7 +20,7 @@ function load_map() {
 }
 
 function readJSON(gameSelected){
-	$.getJSON("X-Nav-Practica-Adivina/juegos/" + gameSelected)
+	$.getJSON("juegos/" + gameSelected)
 		.done(function(data){
 			var cont = Math.floor(Math.random() * (4-0+1)) + 0;
 			while(cont == cont2)
